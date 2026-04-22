@@ -6,7 +6,6 @@ permalink: /
 ---
 
 # Bienvenue sur notre documentation
-hh
 Bienvenue dans la documentation du projet XY. Ce site a pour but de fournir toutes les informations nécessaires pour comprendre, utiliser et reproduire efficacement notre projet.
 
 [Notre projet sur Onshape](https://cad.onshape.com/documents/e895d617fa85e3b715768f5c/v/efa0b0bc12fe522d979fde8b/e/5e27dc6e7103b2e81bcf4c4e){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
