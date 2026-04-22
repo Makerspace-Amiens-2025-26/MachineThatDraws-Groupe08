@@ -19,7 +19,11 @@ Bienvenue dans la documentation du projet XY. Ce site a pour but de fournir tout
 
 ## À propos du Projet
 
-Décrivez ici en quelques lignes l'objectif et l'aperçu général de votre projet. Quel est son but ? À qui est-il destiné ? Quels problèmes cherche-t-il à résoudre ?
+Machine That Draws est un projet de conception et de prototypage réalisé dans le cadre du Makerspace d’UniLaSalle Amiens. Notre objectif est de développer une machine cartésienne capable de dessiner automatiquement sur une feuille à l’aide de moteurs pas-à-pas, d’une carte de commande et d’un système de pilotage programmable. D’après votre site, les sections prévues présentent les objectifs, les choix techniques, la conception, le prototypage et les étapes de fabrication, ce qui correspond bien à une documentation de projet reproductible.
+
+Ce projet nous permet de relier plusieurs domaines complémentaires : modélisation 3D, électronique, programmation et fabrication. La machine repose sur un déplacement selon deux axes X et Y, afin de tracer des formes, motifs ou dessins de manière précise et automatisée. L’idée n’est pas seulement d’obtenir un prototype fonctionnel, mais aussi de comprendre toute la démarche d’ingénierie, depuis le besoin initial jusqu’aux tests et aux améliorations successives.
+
+Cette documentation a pour but de présenter notre démarche, nos choix de conception, les composants utilisés et les différentes étapes de réalisation. Elle doit permettre à n’importe quelle personne intéressée de comprendre le fonctionnement de la machine, suivre son développement et éventuellement la reproduire. Votre page d’accueil indique déjà cette intention de “comprendre, utiliser et reproduire efficacement” le projet, donc ce texte s’intègre bien à l’esprit du site.
 
 
 ## Poster
