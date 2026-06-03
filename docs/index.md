@@ -30,7 +30,7 @@ Cette documentation a pour but de présenter notre démarche, nos choix de conce
 
 Ici vous publierez le poster de votre projet.
 
-![Poster projet](images/poster_machine.png)
+![Poster projet](images/poster_machine_1.png)
 
 ## Vidéo
 
