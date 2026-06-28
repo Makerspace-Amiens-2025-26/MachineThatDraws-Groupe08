@@ -1,55 +1,616 @@
----
-layout: home
-nav_order: 1
-title: Accueil
-permalink: /
----
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine That Draws — Groupe 08</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fff;--bg2:#f5f6fa;--bg3:#ecedf3;--text:#27262b;--text2:#5c5962;--text3:#959396;--accent:#7253ed;--abg:#ecedf3;--border:#e6e1e8;--wbg:#fff3cd;--wb:#ffc107;--ibg:#d1ecf1;--ib:#0c7abf;--cbg:#f5f6fa;--sw:260px;--th:60px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;font-size:14px;color:var(--text);background:var(--bg);display:flex;min-height:100vh}
+#topbar{display:none;position:fixed;top:0;left:0;right:0;height:var(--th);background:var(--bg);border-bottom:1px solid var(--border);align-items:center;padding:0 20px;gap:12px;z-index:200}
+#menu-btn{background:none;border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:6px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+#topbar-title{font-weight:600;font-size:14px}
+#sidebar{width:var(--sw);min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:100;overflow-y:auto;transition:transform .25s,background .2s}
+.sh{padding:28px 20px 16px;border-bottom:1px solid var(--border)}
+.stag{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.stitle{font-size:18px;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:4px}
+.ssub{font-size:11px;color:var(--text3)}
+nav{padding:10px 0;flex:1}
+.ns{padding:12px 20px 4px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
+.nl{display:block;padding:8px 20px;color:var(--text2);text-decoration:none;font-size:13px;border-left:3px solid transparent;transition:all .15s;cursor:pointer;background:none;border-top:none;border-right:none;border-bottom:none;width:100%;text-align:left;font-family:inherit}
+.nl:hover{background:var(--bg3);color:var(--text);border-left-color:var(--border)}
+.nl.active{background:var(--abg);color:var(--accent);border-left-color:var(--accent);font-weight:500}
+.slinks{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:10px}
+.ext{font-size:11px;color:var(--text3);text-decoration:none;padding:5px 10px;border:1px solid var(--border);border-radius:4px;transition:all .15s}
+.ext:hover{color:var(--accent);border-color:var(--accent);background:var(--abg)}
+#main{margin-left:var(--sw);flex:1;min-width:0}
+#page-content{animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.sec{padding:56px 64px 72px;border-bottom:1px solid var(--border);max-width:860px}
+.sec:last-child{border-bottom:none}
+#home{padding:80px 64px;background:linear-gradient(160deg,var(--bg2) 0%,var(--bg) 60%)}
+.htag{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.htitle{font-size:clamp(32px,5vw,52px);font-weight:700;color:var(--text);line-height:1.1;margin-bottom:16px}
+.hdesc{font-size:15px;color:var(--text2);line-height:1.7;max-width:580px;margin-bottom:32px}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;font-size:13px;font-weight:500;text-decoration:none;border-radius:6px;border:1px solid var(--border);color:var(--text);background:var(--bg);transition:all .15s;font-family:inherit;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent);background:var(--abg)}
+.bp{background:var(--accent);color:#fff;border-color:var(--accent)}
+.bp:hover{background:#5e42c5;border-color:#5e42c5;color:#fff}
+.team{margin-top:40px;padding-top:32px;border-top:1px solid var(--border)}
+.tlabel{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:5px 14px;border-radius:20px;background:var(--bg3);color:var(--text2);font-size:12px;font-weight:500}
+h2{font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px}
+.sub{font-size:14px;color:var(--text3);margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+h3{font-size:15px;font-weight:600;color:var(--text);margin:28px 0 10px}
+p{color:var(--text2);line-height:1.75;margin-bottom:14px}
+p strong{color:var(--text);font-weight:600}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+ul,ol{padding-left:22px;margin-bottom:14px;color:var(--text2);line-height:1.8}
+li{margin-bottom:3px}
+code{background:var(--cbg);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-family:monospace;font-size:12px;color:var(--accent)}
+pre{background:var(--cbg);border:1px solid var(--border);padding:20px;border-radius:6px;overflow-x:auto;font-family:monospace;font-size:12px;line-height:1.8;margin:16px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+th{background:var(--bg2);padding:10px 14px;text-align:left;font-weight:600;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);border:1px solid var(--border)}
+td{padding:10px 14px;border:1px solid var(--border);color:var(--text2)}
+tr:nth-child(even) td{background:var(--bg2)}
+tr:hover td{color:var(--text)}
+.cw{padding:14px 18px;margin:16px 0;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7}
+.cy{background:var(--wbg);border-left:4px solid var(--wb)}
+.ci{background:var(--ibg);border-left:4px solid var(--ib)}
+.cp{background:var(--abg);border-left:4px solid var(--accent)}
+.cw strong{font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:20px 0}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:20px;transition:border-color .15s}
+.card:hover{border-color:var(--accent)}
+.ci2{font-size:22px;margin-bottom:10px}
+.ct{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.cd{font-size:12px;color:var(--text3);line-height:1.6}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.si{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:10px}
+.sd{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dg{background:#22c55e}.do{background:#f59e0b}.dr{background:#ef4444}
+.st{font-size:12px;color:var(--text2)}
+.st strong{color:var(--text);display:block;font-size:13px}
+.mwrap{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:20px 0}
+.mlabel{background:var(--bg2);padding:8px 14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--border)}
+.mwrap iframe{display:block;width:100%;height:480px;border:none}
+.lwrap{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:20px 0;padding:20px;background:var(--bg2)}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.pc{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:20px;transition:border-color .15s}
+.pc:hover{border-color:var(--accent)}
+.pr{font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.pn{font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px}
+.pd{font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:10px}
+.pm{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.mt{font-size:10px;padding:2px 8px;border:1px solid var(--border);color:var(--text3);border-radius:3px}
+.ma{border-color:var(--accent);color:var(--accent)}
+.steps{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.step{background:var(--bg2);border:1px solid var(--border);border-radius:6px;display:flex;overflow:hidden}
+.snum{min-width:48px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff}
+.sbody{padding:16px 20px}
+.sbody h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px}
+.sbody p{margin:0;font-size:13px}
+.leg{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--text3)}
+.li2{display:flex;align-items:center;gap:6px}
+.ld{width:12px;height:12px;border-radius:2px;border:1px solid}
+/* Breadcrumb nav */
+.page-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 64px;border-top:1px solid var(--border);margin-top:40px;max-width:860px}
+.pnav-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:12px;font-weight:500;border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer;background:var(--bg);font-family:inherit;transition:all .15s}
+.pnav-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--abg)}
+.pnav-btn:disabled{opacity:0.3;cursor:default;pointer-events:none}
+.pnav-label{font-size:11px;color:var(--text3);text-align:center}
+@media(max-width:800px){
+  #topbar{display:flex}
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0;padding-top:var(--th)}
+  .sec{padding:36px 24px 48px}
+  #home{padding:48px 24px}
+  .sgrid,.pg{grid-template-columns:1fr}
+  .page-nav{padding:20px 24px}
+}
+</style>
+</head>
+<body>
 
-<h1>Machine That Draws — Groupe 08</h1>
-
-<p class="fs-5 fw-300">Documentation technique du projet · UniLaSalle Amiens · 2025–2026</p>
-
-<a href="https://cad.onshape.com/documents/e895d617fa85e3b715768f5c/v/efa0b0bc12fe522d979fde8b/e/5e27dc6e7103b2e81bcf4c4e" class="btn btn-primary fs-5 mb-4 mr-2" target="_blank">Notre projet sur Onshape</a>
-<a href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08" class="btn fs-5 mb-4" target="_blank">Notre repo GitHub</a>
-
-<hr>
-
-<iframe height="500" width="100%" src="https://modelembedder.net/embed?did=e895d617fa85e3b715768f5c&wvm=v&wvmid=efa0b0bc12fe522d979fde8b&eid=5e27dc6e7103b2e81bcf4c4e&elementType=ASSEMBLY" frameborder="0" allowfullscreen style="display:block;margin:16px 0;border:1px solid #e1e4e8;"></iframe>
-
-<hr>
-
-<div style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;">
-  <strong>⚠ État du projet :</strong> Par manque de temps, la machine n'a pas pu être finalisée et mise en fonctionnement complet. Cette documentation présente l'ensemble de la démarche technique, les composants choisis, les difficultés rencontrées et les solutions mises en œuvre ou envisagées.
+<div id="topbar">
+  <button id="menu-btn" onclick="toggleSidebar()">☰</button>
+  <span id="topbar-title">MTD — Groupe 08</span>
 </div>
 
-<h2>À propos du Projet</h2>
+<aside id="sidebar">
+  <div class="sh">
+    <div class="stag">Groupe 08 · 2025–2026</div>
+    <div class="stitle">Machine That Draws</div>
+    <div class="ssub">Makerspace Amiens</div>
+  </div>
+  <nav>
+    <button class="nl active" onclick="navigate('home',this)">🏠 Accueil</button>
+    <div class="ns">Documentation</div>
+    <button class="nl" onclick="navigate('projet',this)">📋 Le projet</button>
+    <button class="nl" onclick="navigate('conception',this)">⚙️ Conception & pièces</button>
+    <button class="nl" onclick="navigate('electronique',this)">⚡ Électronique</button>
+    <button class="nl" onclick="navigate('programmation',this)">💻 Programmation</button>
+    <div class="ns">Fabrication</div>
+    <button class="nl" onclick="navigate('impression',this)">🖨 Imprimer & Assembler</button>
+    <button class="nl" onclick="navigate('cablage',this)">🔌 Câbler & Souder</button>
+    <div class="ns">Bilan</div>
+    <button class="nl" onclick="navigate('difficultes',this)">⚠️ Difficultés rencontrées</button>
+    <button class="nl" onclick="navigate('suite',this)">🔭 Aller plus loin</button>
+  </nav>
+  <div class="slinks">
+    <a class="ext" href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08" target="_blank">GitHub ↗</a>
+    <a class="ext" href="https://cad.onshape.com/documents/e895d617fa85e3b715768f5c/v/efa0b0bc12fe522d979fde8b/e/5e27dc6e7103b2e81bcf4c4e" target="_blank">Onshape ↗</a>
+  </div>
+</aside>
 
-<p><strong>Machine That Draws</strong> est un projet de conception et de prototypage réalisé dans le cadre du Makerspace d'UniLaSalle Amiens. Notre objectif était de développer une <strong>machine cartésienne</strong> capable de dessiner automatiquement sur une feuille à l'aide de moteurs pas-à-pas, d'une carte de commande et d'un système de pilotage programmable.</p>
+<main id="main">
+  <div id="page-content"></div>
+</main>
 
-<p>Ce projet relie plusieurs domaines complémentaires : modélisation 3D, électronique, programmation et fabrication. La machine repose sur un déplacement selon deux axes <strong>X</strong> et <strong>Y</strong>, afin de tracer des formes, motifs ou dessins de manière précise et automatisée.</p>
+<!-- PAGE TEMPLATES -->
+<template id="tpl-home">
+<section class="sec" id="home" style="padding:80px 64px;background:linear-gradient(160deg,var(--bg2) 0%,var(--bg) 60%);border:none">
+  <div class="htag">Makerspace · UniLaSalle Amiens · 2025–2026</div>
+  <h1 class="htitle">Machine That<br>Draws</h1>
+  <p class="hdesc">Traceur cartésien XY conçu et fabriqué au makerspace. Documentation complète de notre démarche, choix techniques, difficultés rencontrées et solutions mises en œuvre.</p>
+  <div class="hbtns">
+    <a class="btn bp" href="https://cad.onshape.com/documents/e895d617fa85e3b715768f5c/v/efa0b0bc12fe522d979fde8b/e/5e27dc6e7103b2e81bcf4c4e" target="_blank">Modèle Onshape ↗</a>
+    <a class="btn" href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08" target="_blank">GitHub ↗</a>
+    <button class="btn" onclick="navigate('projet',null)">Découvrir →</button>
+  </div>
+  <div class="team">
+    <div class="tlabel">Équipe</div>
+    <div class="chips">
+      <span class="chip">Zacharie</span>
+      <span class="chip">Ainoha</span>
+      <span class="chip">Marwa</span>
+      <span class="chip">Luc</span>
+    </div>
+  </div>
+  <div style="margin-top:40px">
+    <img src="images/poster_machine_1.png" alt="Poster" style="max-width:100%;border:1px solid var(--border);border-radius:6px;display:block;">
+  </div>
+  <div style="margin-top:24px">
+    <video src="images/intro_amiens.mp4" controls style="width:100%;border:1px solid var(--border);border-radius:6px;display:block;"></video>
+  </div>
+</section>
+</template>
 
-<h2>Équipe</h2>
+<template id="tpl-projet">
+<section class="sec" id="projet">
+  <h2>Le projet</h2>
+  <p class="sub">Contexte, objectifs et cahier des charges</p>
+  <div class="cw cy"><strong>⚠ État d'avancement :</strong> Par manque de temps, la machine n'a pas pu être finalisée. Cette documentation présente notre démarche complète, les problèmes rencontrés et ce qui aurait été fait avec plus de temps.</div>
+  <h3>Contexte</h3>
+  <p>Projet réalisé dans le cadre du <strong>Makerspace d'UniLaSalle Amiens</strong>. Objectif : concevoir et fabriquer une machine cartésienne pilotant un stylo sur deux axes X et Y via des moteurs pas-à-pas et le firmware GRBL-Servo.</p>
+  <h3>État d'avancement</h3>
+  <div class="sgrid">
+    <div class="si"><div class="sd dg"></div><div class="st"><strong>Modélisation 3D</strong>Toutes les pièces sur Onshape</div></div>
+    <div class="si"><div class="sd dg"></div><div class="st"><strong>Impression 3D</strong>Pièces imprimées (2 versions)</div></div>
+    <div class="si"><div class="sd dg"></div><div class="st"><strong>Moteurs testés</strong>Ont tourné lors d'un test</div></div>
+    <div class="si"><div class="sd do"></div><div class="st"><strong>Assemblage</strong>Pièces posées, non finalisé</div></div>
+    <div class="si"><div class="sd dr"></div><div class="st"><strong>PCB custom</strong>3,3V non fonctionnel → abandonné</div></div>
+    <div class="si"><div class="sd dr"></div><div class="st"><strong>Firmware & dessin</strong>Non atteint faute de temps</div></div>
+  </div>
+  <h3>Objectifs pédagogiques</h3>
+  <ul>
+    <li>Concevoir une machine CNC cartésienne de A à Z</li>
+    <li>Maîtriser la modélisation 3D sur <strong>Onshape</strong></li>
+    <li>Concevoir un PCB sur <strong>KiCad</strong></li>
+    <li>Comprendre l'architecture Arduino + CNC Shield</li>
+    <li>Documenter un projet technique de manière rigoureuse</li>
+  </ul>
+  <h3>Cahier des charges</h3>
+  <table>
+    <thead><tr><th>Domaine</th><th>Contrainte</th></tr></thead>
+    <tbody>
+      <tr><td>Matériaux</td><td>Planche contreplaqué fournie obligatoirement</td></tr>
+      <tr><td>Électronique</td><td>Arduino et composants associés</td></tr>
+      <tr><td>Logiciel</td><td>Arduino IDE, GitHub, Processing</td></tr>
+      <tr><td>Précision</td><td>Traits précis et soignés</td></tr>
+      <tr><td>Budget-temps</td><td>30 h par semestre en makerspace</td></tr>
+    </tbody>
+  </table>
+</section>
+</template>
 
-<p>Zacharie · Ainoha · Marwa · Luc</p>
+<template id="tpl-conception">
+<section class="sec" id="conception">
+  <h2>Conception & pièces</h2>
+  <p class="sub">Modélisation 3D Onshape et description des pièces imprimées</p>
+  <p>Toutes les pièces ont été modélisées sur <strong>Onshape</strong>, assemblées virtuellement et exportées en STL pour impression 3D.</p>
+  <div class="mwrap">
+    <div class="mlabel">Assemblage complet — Vue 3D interactive</div>
+    <iframe src="https://modelembedder.net/embed?did=e895d617fa85e3b715768f5c&wvm=v&wvmid=efa0b0bc12fe522d979fde8b&eid=5e27dc6e7103b2e81bcf4c4e&elementType=ASSEMBLY" allowfullscreen></iframe>
+  </div>
+  <h3>Structure de la machine</h3>
+  <ul>
+    <li>Châssis en <strong>contreplaqué perforé</strong> (fourni makerspace)</li>
+    <li><strong>4 pieds de coin</strong> surélevant la planche pour le passage des courroies</li>
+    <li><strong>Tiges lisses acier</strong> pour guidage linéaire (2 axes)</li>
+    <li><strong>2 moteurs pas-à-pas</strong> pour déplacement X et Y</li>
+    <li><strong>1 servo FS5103B</strong> pour la levée/abaissement du stylo</li>
+  </ul>
+  <h3>Pièces imprimées</h3>
+  <div class="pg">
+    <div class="pc"><div class="pr">Pièce · 01</div><div class="pn">Support moteur</div><div class="pd">Boîte ouverte logeant le moteur pas-à-pas. Trous ovales pour fixation, ouverture frontale pour axe et poulie.</div><div class="pm"><span class="mt ma">PLA · 30%</span><span class="mt">Axe X</span></div><a href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08/blob/main/docs/images/support%20moteur.stl" target="_blank" style="font-size:11px">Voir STL ↗</a></div>
+    <div class="pc"><div class="pr">Pièce · 02</div><div class="pn">Support moteur simple</div><div class="pd">Fixation compacte avec rainure centrale pour l'axe moteur et épaulement de butée.</div><div class="pm"><span class="mt ma">PLA · 30%</span><span class="mt">Axe Y</span></div><a href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08/blob/main/docs/images/support%20moteur%20simple.stl" target="_blank" style="font-size:11px">Voir STL ↗</a></div>
+    <div class="pc"><div class="pr">Pièce · 03</div><div class="pn">Support moteur double</div><div class="pd">Double appui latéral pour les extrémités à fort effort. Grande platine verticale avec deux bras.</div><div class="pm"><span class="mt ma">PLA · 35%</span><span class="mt">Effort élevé</span></div><a href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08/blob/main/docs/images/support%20moteur%20double.stl" target="_blank" style="font-size:11px">Voir STL ↗</a></div>
+    <div class="pc"><div class="pr">Pièce · 04</div><div class="pn">Support double poulie</div><div class="pd">Maintien des poulies de renvoi côté opposé aux moteurs. Deux poulies folles sous tension de courroie.</div><div class="pm"><span class="mt ma">PLA · 25%</span><span class="mt">×2</span></div><a href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08/blob/main/docs/images/support%20double%20poulie.stl" target="_blank" style="font-size:11px">Voir STL ↗</a></div>
+    <div class="pc"><div class="pr">Pièce · 05</div><div class="pn">Support barre métal</div><div class="pd">Pièce en L pour maintien des tiges lisses acier. Logement cylindrique et ergot d'alignement précis.</div><div class="pm"><span class="mt ma">PLA · 25%</span><span class="mt">×4</span></div><a href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08/blob/main/docs/images/support%20barre%20me%CC%81tal.stl" target="_blank" style="font-size:11px">Voir STL ↗</a></div>
+    <div class="pc"><div class="pr">Pièce · 06</div><div class="pn">Adaptateur</div><div class="pd">Cylindre creux solidarisant la poulie GT2 sur l'axe moteur sans jeu. 100% car soumis à torsion.</div><div class="pm"><span class="mt ma">PLA · 100%</span><span class="mt">×2</span></div><a href="https://github.com/Makerspace-Amiens-2025-26/MachineThatDraws-Groupe08/blob/main/docs/images/adaptateur.stl" target="_blank" style="font-size:11px">Voir STL ↗</a></div>
+  </div>
+  <h3>Récapitulatif</h3>
+  <table>
+    <thead><tr><th>Pièce</th><th>Qté</th><th>Remplissage</th><th>Fonction</th></tr></thead>
+    <tbody>
+      <tr><td>Support moteur</td><td>1</td><td>30%</td><td>Logement moteur axe X</td></tr>
+      <tr><td>Support moteur simple</td><td>1</td><td>30%</td><td>Fixation moteur axe Y</td></tr>
+      <tr><td>Support moteur double</td><td>1</td><td>35%</td><td>Fixation renforcée</td></tr>
+      <tr><td>Support double poulie</td><td>2</td><td>25%</td><td>Renvoi de courroie</td></tr>
+      <tr><td>Support barre métal</td><td>4</td><td>25%</td><td>Maintien tiges guidage</td></tr>
+      <tr><td>Adaptateur</td><td>2</td><td>100%</td><td>Liaison axe/poulie</td></tr>
+      <tr><td>Pieds de coin</td><td>4</td><td>20%</td><td>Rigidité châssis</td></tr>
+    </tbody>
+  </table>
+</section>
+</template>
 
-<h2>État d'avancement</h2>
+<template id="tpl-electronique">
+<section class="sec" id="electronique">
+  <h2>Électronique</h2>
+  <p class="sub">Architecture, composants et PCB KiCad</p>
+  <h3>Architecture générale</h3>
+  <pre>[PC — Processing / UGS]
+         │ USB
+         ▼
+  [Arduino Uno + CNC Shield v3]
+         │
+    ┌────┴────────────────┐          │
+    │                     │          │
+[Driver A4988]     [Driver A4988] [Servo FS5103B]
+    │                     │          │
+[Moteur — X]      [Moteur — Y] [Stylo ↑↓]
 
-<table>
-  <thead><tr><th>Élément</th><th>Statut</th></tr></thead>
-  <tbody>
-    <tr><td>Modélisation 3D (Onshape)</td><td>✅ Réalisé</td></tr>
-    <tr><td>Impression 3D des pièces</td><td>✅ Réalisé (2 versions pour certaines pièces)</td></tr>
-    <tr><td>Test moteurs pas-à-pas</td><td>✅ Ont tourné lors d'un test</td></tr>
-    <tr><td>Assemblage sur la planche</td><td>⚠️ Partiellement réalisé</td></tr>
-    <tr><td>PCB custom (KiCad)</td><td>❌ 3,3V non fonctionnel → abandonné</td></tr>
-    <tr><td>Firmware & premiers dessins</td><td>❌ Non atteint faute de temps</td></tr>
-  </tbody>
-</table>
+        [Alimentation 12V externe]</pre>
+  <h3>Composants</h3>
+  <table>
+    <thead><tr><th>Composant</th><th>Modèle</th><th>Qté</th><th>Rôle</th></tr></thead>
+    <tbody>
+      <tr><td>Microcontrôleur</td><td>Arduino Uno</td><td>1</td><td>Pilotage GRBL-Servo</td></tr>
+      <tr><td>Carte d'extension</td><td>CNC Shield v3</td><td>1</td><td>Interface moteurs et alim.</td></tr>
+      <tr><td>Driver moteur</td><td>A4988</td><td>2</td><td>Contrôle moteur pas-à-pas (STEP/DIR)</td></tr>
+      <tr><td>Moteur pas-à-pas</td><td>NEMA 17</td><td>2</td><td>Déplacement axes X et Y</td></tr>
+      <tr><td>Servo-moteur</td><td>FeeTech FS5103B</td><td>1</td><td>Levée/abaissement stylo</td></tr>
+      <tr><td>Alimentation</td><td>12V / 5A</td><td>1</td><td>Alimentation moteurs</td></tr>
+    </tbody>
+  </table>
+  <div class="cw ci"><strong>ℹ Choix contraint :</strong> Nous avions conçu un <strong>PCB custom sur KiCad</strong>. Lors des tests, le 3,3V ne passait pas dans la carte. Nous avons donc adopté Arduino Uno + CNC Shield v3.</div>
+  <h3>Notre PCB KiCad</h3>
+  <p>Nous avons conçu nous-mêmes un PCB sur <strong>KiCad</strong> pour centraliser l'électronique : régulateur de tension, connecteurs moteurs, gestion servo. Lors des tests physiques, la tension <strong>3,3V était absente en sortie</strong> du régulateur — problème non résolu faute de temps.</p>
+  <h3>Drivers A4988</h3>
+  <table>
+    <thead><tr><th>Caractéristique</th><th>Valeur</th></tr></thead>
+    <tbody>
+      <tr><td>Tension alimentation moteur</td><td>8 à 35V</td></tr>
+      <tr><td>Courant max par phase</td><td>2A</td></tr>
+      <tr><td>Modes micro-pas</td><td>1 · 1/2 · 1/4 · 1/8 · 1/16</td></tr>
+      <tr><td>Formule Vref</td><td>Vref = Imax × 8 × Rs (Rs = 0,1 Ω)</td></tr>
+    </tbody>
+  </table>
+  <h3>Moteurs pas-à-pas</h3>
+  <table>
+    <thead><tr><th>Caractéristique</th><th>Valeur</th></tr></thead>
+    <tbody>
+      <tr><td>Angle de pas</td><td>1,8° (200 pas/tour)</td></tr>
+      <tr><td>Tension nominale</td><td>12V</td></tr>
+      <tr><td>Courant par phase</td><td>~1,5A</td></tr>
+      <tr><td>Couple de maintien</td><td>~40 N·cm</td></tr>
+    </tbody>
+  </table>
+  <h3>Servo FeeTech FS5103B</h3>
+  <ul>
+    <li><code>M3 S0</code> → Stylo <strong>levé</strong></li>
+    <li><code>M3 S255</code> → Stylo <strong>abaissé</strong></li>
+  </ul>
+  <table>
+    <thead><tr><th>Caractéristique</th><th>Valeur</th></tr></thead>
+    <tbody>
+      <tr><td>Plage PWM</td><td>600 à 2400 µs</td></tr>
+      <tr><td>Angle</td><td>180°</td></tr>
+      <tr><td>Tension</td><td>4,8 à 6V</td></tr>
+    </tbody>
+  </table>
+</section>
+</template>
 
-<h2>Poster</h2>
+<template id="tpl-programmation">
+<section class="sec" id="programmation">
+  <h2>Programmation</h2>
+  <p class="sub">Firmware GRBL-Servo, logigramme et pipeline G-code</p>
+  <h3>GRBL-Servo</h3>
+  <p>Firmware open-source transformant un Arduino Uno en contrôleur CNC. Il interprète les commandes G-code (USB) et génère les signaux STEP/DIR pour les moteurs. La version Servo réaffecte <code>M3/M5</code> au contrôle du servo-moteur.</p>
+  <div class="cw cy"><strong>⚠ Non réalisé :</strong> Nous n'avons pas eu le temps d'uploader le firmware. Les problèmes PCB et moteurs ont consommé le budget-temps avant cette étape.</div>
+  <h3>Installation prévue</h3>
+  <div class="steps">
+    <div class="step"><div class="snum">1</div><div class="sbody"><h4>Télécharger grbl-servo</h4><p><a href="https://github.com/vankesteren/grbl-servo" target="_blank">github.com/vankesteren/grbl-servo</a></p></div></div>
+    <div class="step"><div class="snum">2</div><div class="sbody"><h4>Copier dans les librairies</h4><p>Dossier <code>grbl/</code> → <code>Documents/Arduino/libraries/</code></p></div></div>
+    <div class="step"><div class="snum">3</div><div class="sbody"><h4>Modifier spindle_control.c</h4><p><code>#define RC_SERVO_SHORT 9</code> et <code>#define RC_SERVO_LONG 34</code></p></div></div>
+    <div class="step"><div class="snum">4</div><div class="sbody"><h4>Uploader via Arduino IDE</h4><p><code>File → Examples → grbl → grblUpload</code></p></div></div>
+    <div class="step"><div class="snum">5</div><div class="sbody"><h4>Configurer via UGS</h4><p>Envoyer <code>$100</code>, <code>$101</code>, <code>$110</code>, <code>$111</code>…</p></div></div>
+  </div>
+  <h3>Logigramme du fonctionnement global</h3>
+  <p>Ce logigramme décrit le fonctionnement complet de la machine, de l'image source jusqu'au tracé physique sur la feuille.</p>
+  <div class="lwrap">
+    <svg width="100%" viewBox="0 0 680 900" role="img">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="240" y="20" width="200" height="44" rx="22" fill="var(--bg3)" stroke="var(--border)" stroke-width="1"/>
+      <text x="340" y="42" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="var(--text)">Image source</text>
+      <line x1="340" y1="64" x2="340" y2="100" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <rect x="190" y="100" width="300" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <text x="340" y="120" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#085041">Inkscape</text>
+      <text x="340" y="142" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0F6E56">Vectorisation en SVG</text>
+      <line x1="340" y1="156" x2="340" y2="196" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <rect x="190" y="196" width="300" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <text x="340" y="216" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#085041">Processing + Geomerative</text>
+      <text x="340" y="238" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0F6E56">Génération du fichier G-code</text>
+      <line x1="340" y1="252" x2="340" y2="292" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <rect x="190" y="292" width="300" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="340" y="312" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#3C3489">Universal G-Code Sender</text>
+      <text x="340" y="334" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">Envoi du G-code à l'Arduino via USB</text>
+      <line x1="340" y1="348" x2="340" y2="388" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <rect x="190" y="388" width="300" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="340" y="408" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#3C3489">GRBL-Servo (Arduino)</text>
+      <text x="340" y="430" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">Interprétation des commandes G-code</text>
+      <line x1="340" y1="444" x2="340" y2="484" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <polygon points="340,484 500,524 340,564 180,524" fill="var(--wbg)" stroke="var(--wb)" stroke-width="1"/>
+      <text x="340" y="524" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="var(--text)">Type de commande ?</text>
+      <line x1="180" y1="524" x2="80" y2="524" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <text x="128" y="512" text-anchor="middle" font-size="11" fill="var(--text3)">G0 / G1</text>
+      <line x1="80" y1="524" x2="80" y2="580" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <rect x="16" y="580" width="160" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <text x="96" y="600" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#712B13">Déplacement XY</text>
+      <text x="96" y="620" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#993C1D">Moteurs pas-à-pas</text>
+      <line x1="500" y1="524" x2="600" y2="524" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <text x="552" y="512" text-anchor="middle" font-size="11" fill="var(--text3)">M3 / M5</text>
+      <line x1="600" y1="524" x2="600" y2="580" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <rect x="504" y="580" width="160" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+      <text x="584" y="600" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#712B13">Levée / abaissement</text>
+      <text x="584" y="620" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#993C1D">Servo-moteur stylo</text>
+      <line x1="96" y1="636" x2="96" y2="680" stroke="var(--border)" stroke-width="1" fill="none"/>
+      <line x1="96" y1="680" x2="340" y2="680" stroke="var(--border)" stroke-width="1" fill="none"/>
+      <line x1="600" y1="636" x2="600" y2="680" stroke="var(--border)" stroke-width="1" fill="none"/>
+      <line x1="600" y1="680" x2="340" y2="680" stroke="var(--border)" stroke-width="1" fill="none"/>
+      <line x1="340" y1="680" x2="340" y2="716" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <polygon points="340,716 480,746 340,776 200,746" fill="var(--wbg)" stroke="var(--wb)" stroke-width="1"/>
+      <text x="340" y="746" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="var(--text)">Dessin terminé ?</text>
+      <line x1="200" y1="746" x2="96" y2="746" stroke="var(--border)" stroke-width="1" fill="none"/>
+      <line x1="96" y1="746" x2="96" y2="434" stroke="var(--border)" stroke-width="1" fill="none"/>
+      <line x1="96" y1="434" x2="190" y2="434" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <text x="52" y="590" text-anchor="middle" font-size="11" fill="var(--text3)">Non</text>
+      <line x1="340" y1="776" x2="340" y2="816" stroke="var(--text3)" stroke-width="1.5" marker-end="url(#ar)" fill="none"/>
+      <text x="358" y="798" text-anchor="start" font-size="11" fill="var(--text3)">Oui</text>
+      <rect x="240" y="816" width="200" height="44" rx="22" fill="var(--bg3)" stroke="var(--border)" stroke-width="1"/>
+      <text x="340" y="838" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="var(--text)">Dessin sur feuille ✓</text>
+    </svg>
+    <div class="leg">
+      <div class="li2"><div class="ld" style="background:var(--bg3);border-color:var(--border)"></div>Début / Fin</div>
+      <div class="li2"><div class="ld" style="background:#E1F5EE;border-color:#0F6E56"></div>Logiciel PC</div>
+      <div class="li2"><div class="ld" style="background:#EEEDFE;border-color:#534AB7"></div>Arduino / Firmware</div>
+      <div class="li2"><div class="ld" style="background:#FAECE7;border-color:#993C1D"></div>Action physique</div>
+      <div class="li2"><div class="ld" style="background:var(--wbg);border-color:var(--wb)"></div>Décision</div>
+    </div>
+  </div>
+  <h3>Paramètres de calibration GRBL</h3>
+  <table>
+    <thead><tr><th>Paramètre</th><th>Commande</th><th>Valeur typique</th></tr></thead>
+    <tbody>
+      <tr><td>Steps/mm axe X</td><td><code>$100=</code></td><td>À calibrer</td></tr>
+      <tr><td>Steps/mm axe Y</td><td><code>$101=</code></td><td>À calibrer</td></tr>
+      <tr><td>Vitesse max X (mm/min)</td><td><code>$110=</code></td><td>800</td></tr>
+      <tr><td>Vitesse max Y (mm/min)</td><td><code>$111=</code></td><td>800</td></tr>
+      <tr><td>Accélération X (mm/s²)</td><td><code>$120=</code></td><td>10</td></tr>
+    </tbody>
+  </table>
+</section>
+</template>
 
-<img src="images/poster_machine_1.png" alt="Poster projet" style="max-width:100%;">
+<template id="tpl-impression">
+<section class="sec" id="impression">
+  <h2>Imprimer & Assembler</h2>
+  <p class="sub">Préparation des matériaux et assemblage mécanique</p>
+  <h3>Matériaux</h3>
+  <table>
+    <thead><tr><th>Matériau</th><th>Usage</th><th>Quantité</th></tr></thead>
+    <tbody>
+      <tr><td>Planche contreplaqué (fournie)</td><td>Châssis principal</td><td>1 pièce</td></tr>
+      <tr><td>Filament PLA</td><td>Toutes les pièces imprimées</td><td>Selon besoin</td></tr>
+      <tr><td>Visserie M3</td><td>Fixation pièces imprimées</td><td>~30 pièces</td></tr>
+      <tr><td>Visserie M5</td><td>Fixation rails et moteurs</td><td>~20 pièces</td></tr>
+      <tr><td>Courroie GT2</td><td>Transmission mouvement</td><td>~1 m × 2 axes</td></tr>
+      <tr><td>Poulies GT2</td><td>Guidage courroie</td><td>×4</td></tr>
+      <tr><td>Tiges lisses acier</td><td>Guidage linéaire</td><td>2 axes</td></tr>
+    </tbody>
+  </table>
+  <div class="cw cp"><strong>💡 Conseil :</strong> Prévoir 0,2 à 0,3 mm de jeu sur tous les trous de visserie et logements d'insertion — le rétreint du PLA réduit les diamètres à l'impression.</div>
+  <h3>Impression 3D — Statut</h3>
+  <table>
+    <thead><tr><th>Pièce</th><th>Remplissage</th><th>Statut</th></tr></thead>
+    <tbody>
+      <tr><td>Support moteur (×3)</td><td>30–35%</td><td>✅ Imprimé (2 versions)</td></tr>
+      <tr><td>Support double poulie (×2)</td><td>25%</td><td>✅ Imprimé</td></tr>
+      <tr><td>Support barre métal (×4)</td><td>25%</td><td>✅ Imprimé (2 versions)</td></tr>
+      <tr><td>Adaptateur (×2)</td><td>100%</td><td>✅ Imprimé</td></tr>
+      <tr><td>Pieds de coin (×4)</td><td>20%</td><td>✅ Imprimé</td></tr>
+    </tbody>
+  </table>
+  <h3>Assemblage réalisé</h3>
+  <ul>
+    <li>Pieds de support fixés aux quatre coins de la planche</li>
+    <li>Rails de guidage (tiges lisses) positionnés sur les supports</li>
+    <li>Supports moteurs positionnés sur le châssis</li>
+    <li>Moteurs pas-à-pas installés dans leurs supports</li>
+  </ul>
+  <div class="cw cy"><strong>⚠</strong> Le montage des courroies, chariots et porte-stylo n'a pas pu être réalisé dans le temps imparti.</div>
+</section>
+</template>
 
-<h2>Vidéo de présentation</h2>
+<template id="tpl-cablage">
+<section class="sec" id="cablage">
+  <h2>Câbler & Souder</h2>
+  <p class="sub">Câblage électronique et PCB KiCad</p>
+  <h3>Notre PCB KiCad</h3>
+  <p>Nous avons conçu un <strong>PCB personnalisé sur KiCad</strong> pour centraliser l'électronique : régulateur de tension, connecteurs moteurs, gestion servo. Les fichiers sont disponibles sur notre GitHub.</p>
+  <div class="cw cy"><strong>⚠ Problème :</strong> Lors des tests physiques, <strong>le 3,3V ne passait pas dans la carte</strong> — le régulateur ne délivrait pas la tension attendue. Nous n'avons pas eu le temps de diagnostiquer et corriger. Solution adoptée : Arduino Uno + CNC Shield v3.</div>
+  <h3>Câblage final</h3>
+  <pre>Arduino Uno + CNC Shield v3
+    │
+    ├── Slot X ──► Driver A4988 ──► Moteur pas-à-pas (axe X)
+    ├── Slot Y ──► Driver A4988 ──► Moteur pas-à-pas (axe Y)
+    └── Pin Z+ ──► Servo FS5103B (stylo ↑↓)
 
-<video src="images/intro_amiens.mp4" controls style="width:100%;"></video>
+Bornier CNC Shield ──► Alimentation 12V externe
+Arduino ──────────────► PC via USB (GRBL + UGS)</pre>
+  <div class="cw cy"><strong>⚠ Important :</strong> Arduino alimenté via USB séparément. Moteurs via 12V externe uniquement.</div>
+  <h3>Réglage A4988 — Vref</h3>
+  <p>Le potentiomètre règle le courant max. Trop faible → moteur vibre sans tourner.</p>
+  <pre>Vref = Imax × 8 × Rs
+Pour moteur pas-à-pas à 1,5A : Vref = 1,5 × 8 × 0,1 = 1,2V</pre>
+</section>
+</template>
+
+<template id="tpl-difficultes">
+<section class="sec" id="difficultes">
+  <h2>Difficultés rencontrées</h2>
+  <p class="sub">Problèmes, causes identifiées et solutions</p>
+  <h3>1. PCB custom — 3,3V absent</h3>
+  <p><strong>Problème :</strong> Notre PCB KiCad ne délivrait pas le 3,3V en sortie lors des tests physiques.</p>
+  <p><strong>Hypothèses :</strong> Composant défectueux sur le régulateur, erreur de routage, ou mauvaise soudure.</p>
+  <p><strong>Solution adoptée :</strong> Abandon du PCB, adoption d'Arduino Uno + CNC Shield v3.</p>
+  <p><strong>Avec plus de temps :</strong> Diagnostic au multimètre en sortie du régulateur, correction et refabrication du PCB.</p>
+  <h3>2. Moteurs qui vibrent sans tourner</h3>
+  <p><strong>Problème :</strong> Les moteurs pas-à-pas vibraient mais ne tournaient pas lors des premiers tests.</p>
+  <p><strong>Causes :</strong> Courant insuffisant sur le driver A4988 (Vref trop basse), ou paire de bobines inversée dans le connecteur.</p>
+  <p><strong>Solution envisagée :</strong> Mesurer Vref au multimètre → ajuster à 1,2V. Vérifier la continuité des bobines.</p>
+  <p><strong>État :</strong> Les moteurs ont tourné lors d'un test mais le problème n'a pas été résolu de façon stable.</p>
+  <h3>3. Erreurs dimensionnelles — pièces imprimées</h3>
+  <p><strong>Problème 1 — Trous de visserie M3 trop petits :</strong> Rétreint du PLA. Correction : +0,3 mm dans Onshape, réimpression.</p>
+  <p><strong>Problème 2 — Logement des tiges trop serré :</strong> Diamètre mesuré au pied à coulisse. Correction : +0,2 mm de jeu, réimpression.</p>
+  <div class="cw ci"><strong>ℹ Leçon apprise :</strong> Toujours prévoir 0,2–0,3 mm de jeu sur les trous de visserie et logements d'insertion en PLA.</div>
+</section>
+</template>
+
+<template id="tpl-suite">
+<section class="sec" id="suite">
+  <h2>Aller plus loin</h2>
+  <p class="sub">Ce qui aurait été fait avec plus de temps</p>
+  <div class="cards">
+    <div class="card"><div class="ci2">🔧</div><div class="ct">Finaliser l'assemblage</div><div class="cd">Monter courroies GT2, chariots et porte-stylo avec servo.</div></div>
+    <div class="card"><div class="ci2">⚡</div><div class="ct">Corriger le PCB</div><div class="cd">Diagnostiquer le 3,3V absent et refaire le PCB KiCad corrigé.</div></div>
+    <div class="card"><div class="ci2">💻</div><div class="ct">Uploader GRBL-Servo</div><div class="cd">Flash du firmware et calibration steps/mm sur les deux axes.</div></div>
+    <div class="card"><div class="ci2">✏️</div><div class="ct">Premier tracé</div><div class="cd">Test avec un carré 50×50 mm pour valider la précision.</div></div>
+    <div class="card"><div class="ci2">🖼</div><div class="ct">Pipeline complet</div><div class="cd">Inkscape → Processing → G-code → UGS → machine → dessin.</div></div>
+    <div class="card"><div class="ci2">🎯</div><div class="ct">Optimisation</div><div class="cd">Réduire le jeu mécanique, améliorer la précision du stylo.</div></div>
+  </div>
+  <h3>Bilan</h3>
+  <p>Malgré les difficultés et la machine non finalisée, ce projet nous a appris :</p>
+  <ul>
+    <li>La conception mécanique d'une machine CNC (Onshape, impression 3D, tolérances)</li>
+    <li>La conception de PCB sur KiCad et ses contraintes de fabrication</li>
+    <li>L'architecture électronique Arduino + CNC Shield + A4988</li>
+    <li>Le diagnostic électronique (tension, courant, bobines moteur)</li>
+    <li>L'importance de la gestion du temps dans un projet d'ingénierie</li>
+  </ul>
+</section>
+</template>
+
+<script>
+const pages = ['home','projet','conception','electronique','programmation','impression','cablage','difficultes','suite'];
+const labels = {
+  home:'🏠 Accueil',
+  projet:'📋 Le projet',
+  conception:'⚙️ Conception & pièces',
+  electronique:'⚡ Électronique',
+  programmation:'💻 Programmation',
+  impression:'🖨 Imprimer & Assembler',
+  cablage:'🔌 Câbler & Souder',
+  difficultes:'⚠️ Difficultés rencontrées',
+  suite:'🔭 Aller plus loin'
+};
+
+let current = 'home';
+
+function navigate(page, btn) {
+  current = page;
+  // Update sidebar active state
+  document.querySelectorAll('.nl').forEach(a => a.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    document.querySelectorAll('.nl').forEach(a => {
+      if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'"+page+"'")) {
+        a.classList.add('active');
+      }
+    });
+  }
+  // Close sidebar on mobile
+  document.getElementById('sidebar').classList.remove('open');
+  // Render page
+  renderPage(page);
+  // Scroll to top
+  window.scrollTo(0,0);
+  // Update hash
+  history.pushState(null, '', '#' + page);
+}
+
+function renderPage(page) {
+  const tpl = document.getElementById('tpl-' + page);
+  const container = document.getElementById('page-content');
+  container.innerHTML = '';
+  if (tpl) {
+    container.appendChild(tpl.content.cloneNode(true));
+  }
+  // Add bottom navigation
+  const idx = pages.indexOf(page);
+  const nav = document.createElement('div');
+  nav.className = 'page-nav';
+  const prev = idx > 0 ? pages[idx-1] : null;
+  const next = idx < pages.length-1 ? pages[idx+1] : null;
+  nav.innerHTML = `
+    <button class="pnav-btn" onclick="navigate('${prev||''}',null)" ${!prev?'disabled':''}>← ${prev ? labels[prev] : ''}</button>
+    <span class="pnav-label">${idx+1} / ${pages.length}</span>
+    <button class="pnav-btn" onclick="navigate('${next||''}',null)" ${!next?'disabled':''}>→ ${next ? labels[next] : ''}</button>
+  `;
+  container.appendChild(nav);
+  // Trigger fade animation
+  container.style.animation = 'none';
+  container.offsetHeight;
+  container.style.animation = '';
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Init: load from hash or default
+window.addEventListener('load', () => {
+  const hash = location.hash.replace('#','');
+  const page = pages.includes(hash) ? hash : 'home';
+  navigate(page, null);
+});
+
+window.addEventListener('popstate', () => {
+  const hash = location.hash.replace('#','');
+  const page = pages.includes(hash) ? hash : 'home';
+  navigate(page, null);
+});
+</script>
+</body>
+</html>
