@@ -178,7 +178,7 @@ tr:hover td{color:var(--text)}
     <img src="images/poster_machine_1.png" alt="Poster" style="max-width:100%;border:1px solid var(--border);border-radius:6px;display:block;">
   </div>
   <div style="margin-top:24px">
-    <video src="images/video.mp4" controls style="width:100%;border:1px solid var(--border);border-radius:6px;display:block;"></video>
+    <video src="images/intro_amiens.mp4" controls style="width:100%;border:1px solid var(--border);border-radius:6px;display:block;"></video>
   </div>
 </section>
 </template>
@@ -228,7 +228,7 @@ tr:hover td{color:var(--text)}
   <p>Toutes les pièces ont été modélisées sur <strong>Onshape</strong>, assemblées virtuellement et exportées en STL pour impression 3D.</p>
   <div class="mwrap">
     <div class="mlabel">Assemblage complet — Vue 3D interactive</div>
-    <iframe src="https://cad.onshape.com/embed/documents/e895d617fa85e3b715768f5c/v/efa0b0bc12fe522d979fde8b/e/5e27dc6e7103b2e81bcf4c4e" allowfullscreen></iframe>
+    <iframe src="https://modelembedder.net/embed?did=e895d617fa85e3b715768f5c&wvm=v&wvmid=efa0b0bc12fe522d979fde8b&eid=5e27dc6e7103b2e81bcf4c4e&elementType=ASSEMBLY" allowfullscreen></iframe>
   </div>
   <h3>Structure de la machine</h3>
   <ul>
@@ -294,7 +294,33 @@ tr:hover td{color:var(--text)}
   </table>
   <div class="cw ci"><strong>ℹ Choix contraint :</strong> Nous avions conçu un <strong>PCB custom sur KiCad</strong>. Lors des tests, le 3,3V ne passait pas dans la carte. Nous avons donc adopté Arduino Uno + CNC Shield v3.</div>
   <h3>Notre PCB KiCad</h3>
-  <p>Nous avons conçu nous-mêmes un PCB sur <strong>KiCad</strong> pour centraliser l'électronique : régulateur de tension, connecteurs moteurs, gestion servo. Lors des tests physiques, la tension <strong>3,3V était absente en sortie</strong> du régulateur — problème non résolu faute de temps.</p>
+  <p>Nous avons conçu nous-mêmes un PCB sur <strong>KiCad</strong> pour centraliser l'électronique : régulateur de tension 3,3V, deux emplacements drivers A4988, connecteur servo, lecteur SD, écran OLED, fins de course X/Y et barrel jack 12V. Lors des tests physiques, la tension <strong>3,3V était absente en sortie</strong> du régulateur — problème non résolu faute de temps.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0">
+    <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--bg2)">
+      <div style="padding:8px 14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--border);background:var(--bg2)">Routage PCB — Vue KiCad</div>
+      <a href="pcb_routing.png" target="_blank" style="display:block">
+        <img src="pcb_routing.png" alt="Routage PCB KiCad" style="width:100%;display:block;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      </a>
+      <div style="padding:8px 14px;font-size:11px;color:var(--text3)">Couches cuivre F.Cu (rouge) + B.Cu (bleu) · 2 layers</div>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--bg2)">
+      <div style="padding:8px 14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--border);background:var(--bg2)">Vue 3D — Rendu KiCad</div>
+      <a href="pcb_3d.png" target="_blank" style="display:block">
+        <img src="pcb_3d.png" alt="Vue 3D PCB KiCad" style="width:100%;display:block;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      </a>
+      <div style="padding:8px 14px;font-size:11px;color:var(--text3)">Visualisation des composants THT et SMD</div>
+    </div>
+  </div>
+  <table style="margin-bottom:8px">
+    <thead><tr><th>Bloc</th><th>Composants</th><th>Rôle</th></tr></thead>
+    <tbody>
+      <tr><td>Alimentation</td><td>Barrel Jack 12V, régulateur 3,3V, C1 C2 100µF</td><td>Distribution des tensions</td></tr>
+      <tr><td>Moteurs</td><td>2× socket A4988 (A1, A3), connecteurs Moteur X/Y</td><td>Pilotage pas-à-pas</td></tr>
+      <tr><td>Contrôle</td><td>Connecteur Arduino (J13, J14), fins de course SW_X/SW_Y</td><td>Interface microcontrôleur</td></tr>
+      <tr><td>Périphériques</td><td>Servo (J1), lecteur SD (J3), OLED I²C, LED</td><td>Extensions futures</td></tr>
+    </tbody>
+  </table>
+  <div class="cw cy"><strong>⚠ Problème identifié :</strong> Le régulateur 3,3V ne délivrait pas la tension en sortie lors des tests. Hypothèse : mauvaise soudure ou composant défectueux. Non corrigé faute de temps → solution de repli Arduino Uno + CNC Shield v3.</div>
   <h3>Drivers A4988</h3>
   <table>
     <thead><tr><th>Caractéristique</th><th>Valeur</th></tr></thead>
